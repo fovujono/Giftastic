@@ -1,6 +1,28 @@
-body{
-    
-    float: right;
-    margin-top: 150px;
+* {
+    box-sizing: border-box;
+}
 
+
+#animal-view{
+    background-color: red;
+    height: 200px;
+    
+}
+#container-a {
+    background-color: aqua;
+    height: 200px;
+    width: 50%;
+    float: right;
+ 
+
+}
+
+#gif-display{
+    background-color: blue;
+    float: left;
+    height:600px;;
+    width: 50%;
+
+
+    
 }
