@@ -1,42 +1,38 @@
 
-    // initial array of animals
+    // initial array of random gifs
 
-    var randomArray = ["Pikachu", "Tekken", "HotDog", "Hulk"];
+    var randomArray = ["Magician", "52 cards", "Levitation", "Genie"];
 
 
-    function displayYourGif() {
+ function displayYourGif() {
 
         var yourInput = $(this).attr("data-name")
         //giphy API URl
-         var queryUrl = "http://api.giphy.com/v1/gifs/search?q=api_key=l7ECN0URzNLpKQsqJQIcrFolqaaXWOBjq=" + yourInput + "&limit=10&offset=0&rating=G&lang=en"
-
+         var queryURL = "http://api.giphy.com/v1/gifs/search?q="
+          + yourInput + "&api_key=l7ECN0URzNLpKQsqJQIcrFolqaaXWOBj";
         //AJAX  CALL
         $.ajax({
-                url: queryUrl,
+                url: queryURL,
                 method: "GET",
-                q:yourInput
-            })
-
-             .then(function (response) {
-
-             var gifDiv = $("<div class='gif'>");
-
-
+                q: yourInput
+            
+            }).then(function(response) {
+                
                 var results = response.data;
 
-
-                //for loop for the results 
+    //for loop for the results 
                 for (var i = 0; i < results.length; i++) {
                     //storage
-                  var rated =response.Rated
+                    var gifDiv = $("<div class='gif'>");
                     // having the rating added
-                    var paragraph = $("<p>").html("Rating: " + results[i].rated);
-                    //storage for another div
-                    var gifImage = $("<img>");
-
-                    gifImage.attr("src", results[i].images.fixed_height.url);
-
+                    var rated = response.data[i].rated;
+                    var paragraph = $("<p>").html("Rating: " + rated);
                     gifDiv.append(paragraph);
+
+                    //storage for img div
+               
+                    var gifImage = $("<img>");
+                   gifImage.attr("src", response.data[i].images.fixed_height.url);
                     gifDiv.append(gifImage);
 
                     $("#gif-display").prepend(gifDiv)
@@ -44,41 +40,49 @@
 
 
                 };
+            });
+        };
+   
 
-                function render() {
+
+//LETS RENDER SOME BUTTONS
+
+               function render() {
                     //no duplicate buttons
-                    $("#gif-view").empty();
+                    $("#gif-button-view").empty();
                     //loop through randomArray
                     for (var i = 0; i < randomArray.length; i++) {
                         var generate = $("<button>");
 
-                        generate.addClass("gifz");
+                        generate.addClass("gif-button");
                         generate.attr("data-name", randomArray[i]);
                         generate.html(randomArray[i]);
 
-                        //add tp the html 
-                        $("#gif-display").append(generate);
+                        //add to the html 
+                        $("#gif-button-view").append(generate);
                     }
                 }
+                console.log(render)
 
                 //function to grab value from what the user submits
                 $("#add-button").on("click", function (event) {
 
                     event.preventDefault();
 
-                    var textbox = $("#submitArea").val().trim();
+                    var yourInput = $("#submitArea").val().trim();
 
                     //push the inputs into the main array at top of this page 
-                    randomArray.push(textbox);
-                    displayYourGif();
+                    randomArray.push(yourInput);
                     render();
                 });
-
-                $(document).on("click", ".gifz", displayYourGif);
-                //initital buttons will be called from our array using 
+        
                 render();
+                $(document).on("click", ".gif-button", displayYourGif);
 
-            });
+
+
+
  
-    };
+
+    
 
