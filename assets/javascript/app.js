@@ -8,7 +8,7 @@
 
         var yourInput = $(this).attr("data-name")
         //giphy API URl
-         var queryURL = "http://api.giphy.com/v1/gifs/search?q="
+         var queryURL = "https://api.giphy.com/v1/gifs/search?q="
           + yourInput + "&api_key=l7ECN0URzNLpKQsqJQIcrFolqaaXWOBj";
         //AJAX  CALL
         $.ajax({
