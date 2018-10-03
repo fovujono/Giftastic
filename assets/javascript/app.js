@@ -1,7 +1,7 @@
 
     // initial array of random gifs
 
-    var randomArray = ["Magician", "52 cards", "Levitation", "Genie"];
+    var randomArray = ["Magic", "52 cards", "Levitation", "Genie"];
 
 
  function displayYourGif() {
@@ -9,7 +9,7 @@
         var yourInput = $(this).attr("data-name")
         //giphy API URl
          var queryURL = "https://api.giphy.com/v1/gifs/search?q="
-          + yourInput + "&api_key=l7ECN0URzNLpKQsqJQIcrFolqaaXWOBj";
+          + yourInput + "&api_key=l7ECN0URzNLpKQsqJQIcrFolqaaXWOBj&limit=10";
         //AJAX  CALL
         $.ajax({
                 url: queryURL,
@@ -25,8 +25,8 @@
                     //storage
                     var gifDiv = $("<div class='gif'>");
                     // having the rating added
-                    var rated = response.data[i].rated;
-                    var paragraph = $("<p>").html("Rating: " + rated);
+                    var rating = response.data[i].rating;
+                    var paragraph = $("<p>").html("Rating: " + rating);
                     gifDiv.append(paragraph);
 
                     //storage for img div
